@@ -14,7 +14,7 @@ A FastAPI-based image processing service with feature detection capabilities, bu
 
 ## Prerequisites
 
-- Docker and Docker Compose installed
+- Docker and Docker Compose installed ()
 - Git (for cloning the repository)
 
 ## Quick Start
@@ -22,8 +22,8 @@ A FastAPI-based image processing service with feature detection capabilities, bu
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repository-url>
-cd <repository-name>
+git clone git@github.com:NastiaFasova/feature-detector.git
+cd feature_detector
 ```
 
 ### 2. Environment Configuration
@@ -31,17 +31,26 @@ cd <repository-name>
 You may see, that I left .env file for testing purposes. If you're willing to create your own database,
 please change .env file, so that it contains parameters with credentials to your recently created db
 
+Feel free to use sql query below:
+```sql
+CREATE DATABASE <db_name>;
+```
+
+More information can be found here:
+https://www.postgresql.org/docs/current/manage-ag-createdb.html
+
+
 ### 3. Run the Service
 
 ```bash
 # Start all services
-Open Docker Desktop (to run docker daemon)
+Open Docker Desktop (to start docker daemon)
 docker-compose up --build
 ```
 
 ### 4. Verify Installation
 
-- **API Documentation**: http://localhost:8002/docs#/
+- **SWAGGER Documentation**: http://localhost:8002/docs#/
 
 ## API Endpoints
 
@@ -52,6 +61,13 @@ docker-compose up --build
 - **Parameters**: 
   - `file`: Image file (JPG, PNG, etc.)
 
+#### Testing example
+After opening http://localhost:8002/docs#/ , feel free to test both endpoints simultaneously
+
+![img.png](img.png)
+![img_1.png](img_1.png)
+
+![img_2.png](img_2.png)
 
 ## Project Structure
 
