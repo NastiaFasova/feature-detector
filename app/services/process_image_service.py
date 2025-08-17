@@ -1,3 +1,6 @@
+"""
+Service layer for image processing operations with caching and feature detection.
+"""
 import asyncio
 import os
 from pathlib import Path
@@ -23,6 +26,15 @@ class ProcessImageService:
         self.log_repository = log_repository
 
     async def process_image(self, file: UploadFile):
+        """
+                The method uses file hashing to implement intelligent caching - identical
+                files (same content) will return cached results without reprocessing,
+                significantly improving performance and reducing computational overhead.
+
+                Args:
+                    file (UploadFile): FastAPI UploadFile object containing the image data.
+                                     Supports common image formats (JPEG, PNG, etc.)
+                """
         content = await file.read()
         await file.seek(0)
 

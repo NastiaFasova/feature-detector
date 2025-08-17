@@ -1,3 +1,9 @@
+"""
+Service layer for logging HTTP requests and responses.
+This module provides a high-level service for logging API requests, responses,
+and file processing activities. It handles JSON parsing, database session management,
+and coordinates with the repository layer for persistent storage of log data.
+"""
 import json
 from datetime import datetime
 from typing import Optional
@@ -13,6 +19,18 @@ class LoggingService:
 
     async def log_request_response(self, method: str,
                                    response_body: Optional[str] = None, file_hash: Optional[str] = None) -> Optional[LogRequest]:
+        """
+                Log an HTTP request with its response data and optional file information.
+                Args:
+                    method (str): HTTP method used for the request (GET, POST, PUT, DELETE, etc.)
+                    response_body (Optional[str]): Raw response body content. Can be JSON string,
+                                                 plain text, or None. Defaults to None.
+                    file_hash (Optional[str]): Hash identifier of any associated file processing.
+                                             Used for linking requests to file operations. Defaults to None.
+                Returns:
+                    Optional[LogRequest]: The created log entry with generated ID and timestamp,
+                                        or None if the operation fails.
+                """
 
         parsed_response = None
         if response_body:

@@ -1,3 +1,6 @@
+"""
+Global feature detector manager with singleton pattern and thread-safe initialization.
+"""
 import asyncio
 
 from app.utils.feature_detector import FeatureDetector

@@ -29,13 +29,13 @@ cd <repository-name>
 ### 2. Environment Configuration
 
 You may see, that I left .env file for testing purposes. If you're willing to create your own database,
-please fill in .env parameters with your credentials to db
+please change .env file, so that it contains parameters with credentials to your recently created db
 
 ### 3. Run the Service
 
 ```bash
 # Start all services
-Open Docker Desktop 
+Open Docker Desktop (to run docker daemon)
 docker-compose up --build
 ```
 
@@ -85,13 +85,6 @@ docker-compose up --build
 
 ## Development
 
-### Running in Development Mode
-
-For development with hot-reload:
-
-```bash
-# Update docker-compose.yml to add reload flag
-docker-compose up --build
 ```
 
 ### Accessing the Database
@@ -103,7 +96,7 @@ docker-compose exec db psql -U user -d feature_detector_db
 # Common SQL commands
 \dt                              # List tables
 SELECT * FROM log_requests;      # View logs
-\q                              # Quit
+\q                               # Quit
 ```
 
 ### Viewing Logs

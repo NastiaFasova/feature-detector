@@ -1,3 +1,9 @@
+"""
+Database model for logging HTTP requests and file processing activities.
+
+This module defines the LogRequest model that stores information about
+API requests, responses, and file operations for auditing and debugging purposes.
+"""
 from datetime import datetime
 from sqlalchemy import Column, Integer, DateTime, VARCHAR
 from sqlalchemy.dialects.postgresql import JSONB

@@ -1,5 +1,4 @@
 import asyncio
-from functools import lru_cache
 
 from starlette.concurrency import iterate_in_threadpool
 from starlette.middleware.base import BaseHTTPMiddleware
@@ -7,7 +6,8 @@ from starlette.requests import Request
 from starlette.responses import Response
 
 from app.services.logging_service import LoggingService
-from app.utils.request_analyze_helper import extract_file_hash_from_request
+from app.utils.file_hash import FileHash
+
 
 class RequestLoggingMiddleware(BaseHTTPMiddleware):
     """
@@ -17,6 +17,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
     def __init__(self, app):
         super().__init__(app)
         self.logging_service = LoggingService()
+        self.file_hash = FileHash()
 
     async def dispatch(self, request: Request, call_next):
         """
@@ -56,7 +57,7 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
 
             request._receive = receive
 
-            return await extract_file_hash_from_request(request)
+            return await self.file_hash.extract_file_hash_from_request(request)
 
         except Exception as e:
             print(f"Error extracting file hash in middleware: {e}")
@@ -78,5 +79,4 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
                 return f"<binary data: {len(body_bytes)} bytes>"
 
         except Exception as e:
-            print(f"Error extracting response body: {e}")
             return "<error extracting response>"
