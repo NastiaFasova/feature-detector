@@ -37,10 +37,6 @@ DB_PORT=5432
 DB_NAME=feature_detector_db
 DB_USER=user
 DB_PASSWORD=password
-
-# Application Configuration
-DEBUG=false
-LOG_LEVEL=INFO
 ```
 
 ### 3. Run the Service
@@ -48,15 +44,11 @@ LOG_LEVEL=INFO
 ```bash
 # Start all services
 docker-compose up --build
-
-# Or run in background
-docker-compose up -d --build
 ```
 
 ### 4. Verify Installation
 
 - **API Documentation**: http://localhost:8002/docs
-- **Health Check**: http://localhost:8002/check-status
 
 ## API Endpoints
 
@@ -70,16 +62,6 @@ docker-compose up -d --build
 **Example using curl:**
 ```bash
 curl -X POST -F "file=@image.jpg" http://localhost:8002/process-image
-```
-
-**Example using Python:**
-```python
-import requests
-
-with open('image.jpg', 'rb') as f:
-    files = {'file': f}
-    response = requests.post('http://localhost:8002/process-image', files=files)
-    print(response.json())
 ```
 
 ### Check Service Status
@@ -100,7 +82,7 @@ curl http://localhost:8002/check-status
 │   ├── middleware/
 │   │   └── logging.py         # Request/response logging
 │   ├── models/
-│   │   └── log_request.py     # Database models
+│   │   └── log_request_model.py     # Database models
 │   ├── repositories/
 │   │   └── repositories.py    # Data access layer
 │   ├── routes/
@@ -112,6 +94,7 @@ curl http://localhost:8002/check-status
 │       ├── feature_detector.py        # OpenCV feature detection
 │       ├── feature_detector_manager.py # Detector singleton
 │       └── file_hash.py               # File hashing utilities
+│       └── request_analyze_helper.py  # File hashing utilities
 ├── docker-compose.yml
 ├── Dockerfile
 ├── requirements.txt
@@ -234,45 +217,3 @@ curl -X POST -F "file=@test.jpg" http://localhost:8002/process-image
 # Check detector status
 curl http://localhost:8002/check-status
 ```
-
-## Production Deployment
-
-For production deployment:
-
-1. **Remove development volume mount**:
-   ```yaml
-   # Comment out in docker-compose.yml
-   # volumes:
-   #   - .:/usr/src/app
-   ```
-
-2. **Set production environment variables**:
-   ```env
-   DEBUG=false
-   LOG_LEVEL=WARNING
-   ```
-
-3. **Use environment-specific configurations**:
-   ```bash
-   docker-compose -f docker-compose.prod.yml up -d
-   ```
-
-## Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Support
-
-If you encounter any problems or have questions:
-
-1. Check the [Troubleshooting](#troubleshooting) section
-2. Review the logs: `docker-compose logs -f`
-3. Open an issue in the repository
