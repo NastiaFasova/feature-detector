@@ -44,6 +44,8 @@ DB_PASSWORD=password
 ```bash
 # Start all services
 docker-compose up --build
+docker-compose exec db psql -U user -d postgres -c "CREATE DATABASE feature_detector_db;"
+docker-compose exec db psql -U user -d postgres -c 'GRANT ALL PRIVILEGES ON DATABASE feature_detector_db2 TO "user";'
 ```
 
 ### 4. Verify Installation
