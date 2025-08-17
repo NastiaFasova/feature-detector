@@ -1,7 +1,7 @@
 # Image Processing Service
 
 A FastAPI-based image processing service with feature detection capabilities, built with Docker and PostgreSQL.
-
+(Python 3.11.9)
 ## Features
 
 - 🖼️ Image upload and processing
@@ -126,9 +126,9 @@ database and select rows.
 docker-compose exec db psql -U user -d feature_detector_db
 
 # Common SQL commands
-\dt                              # List tables
-SELECT * FROM log_requests;      # View logs
-\q                               # Quit
+\dt                                                                # List tables
+select * from log_requests order by entry_date desc limit 10;      # View logs
+\q                                                                 # Quit
 ```
 
 ### Supported Image Formats
