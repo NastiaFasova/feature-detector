@@ -29,7 +29,7 @@ cd feature_detector
 ### 2. Environment Configuration
 
 You may see, that I left .env file for testing purposes. If you're willing to create your own database,
-please change .env file, so that it contains parameters with credentials to your recently created db
+please change .env file. It should contain parameters with credentials to your recently created db
 
 Feel free to use sql query below:
 ```sql
@@ -68,12 +68,21 @@ After opening http://localhost:8002/docs#/ , feel free to test both endpoints si
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 
+Or you may also use command line
+
+```bash
+curl -X POST -F "file=@/full_path_to_your_file/Screenshot.png" http://localhost:8002/process-image
+```
 
 ### Check status
 - **URL**: `GET /check-status`
 - **Description**: Checks if feature-detector was initialized
   
 ![img_2.png](img_2.png)
+
+```bash
+ curl http://localhost:8002/check-status
+```
 
 ## Project Structure
 
@@ -97,7 +106,6 @@ After opening http://localhost:8002/docs#/ , feel free to test both endpoints si
 │       ├── feature_detector.py        # OpenCV feature detection
 │       ├── feature_detector_manager.py # Detector singleton
 │       └── file_hash.py               # File hashing utilities
-│       └── request_analyze_helper.py  # File hashing utilities
 ├── docker-compose.yml
 ├── Dockerfile
 ├── requirements.txt
