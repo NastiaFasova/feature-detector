@@ -28,29 +28,20 @@ cd <repository-name>
 
 ### 2. Environment Configuration
 
-Create a `.env` file in the project root:
-
-```env
-# Database Configuration
-DB_HOST=db
-DB_PORT=5432
-DB_NAME=feature_detector_db
-DB_USER=user
-DB_PASSWORD=password
-```
+You may see, that I left .env file for testing purposes. If you're willing to create your own database,
+please fill in .env parameters with your credentials to db
 
 ### 3. Run the Service
 
 ```bash
 # Start all services
+Open Docker Desktop 
 docker-compose up --build
-docker-compose exec db psql -U user -d postgres -c "CREATE DATABASE feature_detector_db;"
-docker-compose exec db psql -U user -d postgres -c 'GRANT ALL PRIVILEGES ON DATABASE feature_detector_db2 TO "user";'
 ```
 
 ### 4. Verify Installation
 
-- **API Documentation**: http://localhost:8002/docs
+- **API Documentation**: http://localhost:8002/docs#/
 
 ## API Endpoints
 
@@ -61,18 +52,6 @@ docker-compose exec db psql -U user -d postgres -c 'GRANT ALL PRIVILEGES ON DATA
 - **Parameters**: 
   - `file`: Image file (JPG, PNG, etc.)
 
-**Example using curl:**
-```bash
-curl -X POST -F "file=@image.jpg" http://localhost:8002/process-image
-```
-
-### Check Service Status
-- **URL**: `GET /check-status`
-- **Description**: Check if the feature detector is ready
-
-```bash
-curl http://localhost:8002/check-status
-```
 
 ## Project Structure
 
@@ -143,56 +122,10 @@ docker-compose logs -f db
 
 ## Configuration
 
-### Environment Variables
-
-| Variable | Description | Default |
-|----------|-------------|---------|
-| `DB_HOST` | Database host | `db` |
-| `DB_PORT` | Database port | `5432` |
-| `DB_NAME` | Database name | `feature_detector_db` |
-| `DB_USER` | Database user | `user` |
-| `DB_PASSWORD` | Database password | `password` |
-| `DEBUG` | Enable debug mode | `false` |
-| `LOG_LEVEL` | Logging level | `INFO` |
-
 ### Supported Image Formats
 
 - JPEG (.jpg, .jpeg)
 - PNG (.png)
-- BMP (.bmp)
-- TIFF (.tiff, .tif)
-- WebP (.webp)
-
-## Troubleshooting
-
-### Common Issues
-
-1. **Port already in use**:
-   ```bash
-   # Change port in docker-compose.yml
-   ports:
-     - "8003:8002"  # Use port 8003 instead
-   ```
-
-2. **Database connection errors**:
-   ```bash
-   # Check if database is running
-   docker-compose ps
-   
-   # Restart services
-   docker-compose down
-   docker-compose up --build
-   ```
-
-3. **Permission denied errors**:
-   ```bash
-   # Fix file permissions
-   sudo chown -R $USER:$USER .
-   ```
-
-4. **Image processing fails**:
-   - Ensure the uploaded file is a valid image format
-   - Check if OpenCV dependencies are properly installed in the container
 
 ### Reset Everything
 
@@ -205,17 +138,4 @@ docker-compose down --rmi all
 
 # Rebuild from scratch
 docker-compose up --build
-```
-
-### Check Service Health
-
-```bash
-# Test basic connectivity
-curl http://localhost:8002/
-
-# Test image processing (replace with actual image)
-curl -X POST -F "file=@test.jpg" http://localhost:8002/process-image
-
-# Check detector status
-curl http://localhost:8002/check-status
 ```
