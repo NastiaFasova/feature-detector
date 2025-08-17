@@ -1,0 +1,10 @@
+aiofiles
+pydantic
+starlette
+pydantic-settings
+sqlalchemy
+opencv-python-headless
+fastapi
+uvicorn[standard]
+asyncpg
+python-multipart
