@@ -14,7 +14,7 @@ A FastAPI-based image processing service with feature detection capabilities, bu
 
 ## Prerequisites
 
-- Docker and Docker Compose installed ()
+- Docker and Docker Compose installed (https://docs.docker.com/compose/install/)
 - Git (for cloning the repository)
 
 ## Quick Start
@@ -42,13 +42,14 @@ https://www.postgresql.org/docs/current/manage-ag-createdb.html
 
 ### 3. Run the Service
 
+Open Docker Desktop (to start docker daemon)
 ```bash
 # Start all services
-Open Docker Desktop (to start docker daemon)
 docker-compose up --build
 ```
 
 ### 4. Verify Installation
+In order to verify successful running of application, we may open a page in browser with SWAGGER
 
 - **SWAGGER Documentation**: http://localhost:8002/docs#/
 
@@ -67,6 +68,11 @@ After opening http://localhost:8002/docs#/ , feel free to test both endpoints si
 ![img.png](img.png)
 ![img_1.png](img_1.png)
 
+
+### Check status
+- **URL**: `GET /check-status`
+- **Description**: Checks if feature-detector was initialized
+  
 ![img_2.png](img_2.png)
 
 ## Project Structure
@@ -101,7 +107,9 @@ After opening http://localhost:8002/docs#/ , feel free to test both endpoints si
 
 ## Development
 
-```
+In order to check if all requests were successfully written into database, we can access 
+database and select rows.
+
 
 ### Accessing the Database
 
@@ -114,22 +122,6 @@ docker-compose exec db psql -U user -d feature_detector_db
 SELECT * FROM log_requests;      # View logs
 \q                               # Quit
 ```
-
-### Viewing Logs
-
-```bash
-# View all logs
-docker-compose logs
-
-# Follow logs in real-time
-docker-compose logs -f
-
-# View specific service logs
-docker-compose logs -f fastapi
-docker-compose logs -f db
-```
-
-## Configuration
 
 ### Supported Image Formats
 
